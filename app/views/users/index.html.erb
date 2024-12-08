@@ -1,228 +1,57 @@
-<div>
-  <div>
-    <h1>
-      List of all users
-    </h1>
-  </div>
-</div>
+<h1>List of users</h1>
+
+<!--COMMENTED OUT USER SUBMISSION-->
+<!--<form action="/add_user" method="post">-->
+  <!--<label for="browser_username">Username</label>-->
+  <!--<input id="browser_username" type="text" name="input_username" placeholder="Enter a username...">-->
+
+  <!--<button>Add user</button>-->
+<!--</form>-->
 
 <hr>
 
-<div>
-  <div>
-    <h2>
-      Add a new user
-    </h2>
+<table border="1">
+  <tr>
+    <th>
+      Username
+    </th>
 
-    <form action="/insert_user" method="post">
-      <div>
-        <label for="comments_count_box">
-          Comments count
-        </label>
+    <th>
+      Private?
+    </th>
 
-        <input type="text" id="comments_count_box" name="query_comments_count">
-      </div>
+    <th>
+      <!--//Hidden follower info-->
+    </th>
 
-      <div>
-        <label for="email_box">
-          Email
-        </label>
+    <td>
+    </td>
+  </tr>
 
-        <input type="text" id="email_box" name="query_email">
-      </div>
+  <% @list_of_users.each do |a_user| %>
 
-      <div>
-        <label for="encrypted_password_box">
-          Encrypted password
-        </label>
+    <tr>
+      <td>
+        <%= a_user.username %>
+      </td>
 
-        <input type="text" id="encrypted_password_box" name="query_encrypted_password">
-      </div>
+      <td>
+        <%if a_user.private %>
+          Yes
+        <% else %>
+          No
+        <% end %>
+      </td>
 
-      <div>
-        <label for="likes_count_box">
-          Likes count
-        </label>
+      <td>
+        <!--Request status and Follow/Unfollow/Cancel button-->
+      </td>
 
-        <input type="text" id="likes_count_box" name="query_likes_count">
-      </div>
-
-      <div>
-        <input type="checkbox" id="private_box" name="query_private" value="1">
-
-        <label for="private_box">Private</label>
-      </div>
-
-      <div>
-        <label for="remember_created_at_box">
-          Remember created at
-        </label>
-
-        <input type="datetime-local" id="remember_created_at_box" name="query_remember_created_at">
-      </div>
-
-      <div>
-        <label for="reset_password_sent_at_box">
-          Reset password sent at
-        </label>
-
-        <input type="datetime-local" id="reset_password_sent_at_box" name="query_reset_password_sent_at">
-      </div>
-
-      <div>
-        <label for="reset_password_token_box">
-          Reset password token
-        </label>
-
-        <input type="text" id="reset_password_token_box" name="query_reset_password_token">
-      </div>
-
-      <div>
-        <label for="username_box">
-          Username
-        </label>
-
-        <input type="text" id="username_box" name="query_username">
-      </div>
-
-      <div>
-        <label for="own_photos_count_box">
-          Own photos count
-        </label>
-
-        <input type="text" id="own_photos_count_box" name="query_own_photos_count">
-      </div>
-
-      <button>
-        Create user
-      </button>
-    </form>
-  </div>
-</div>
-
-<hr>
-<div>
-  <div>
-    <table border="1">
-      <tr>
-        <th>
-          ID
-        </th>
-
-        <th>
-          Comments count
-        </th>
-
-        <th>
-          Email
-        </th>
-
-        <th>
-          Encrypted password
-        </th>
-
-        <th>
-          Likes count
-        </th>
-
-        <th>
-          Private
-        </th>
-
-        <th>
-          Remember created at
-        </th>
-
-        <th>
-          Reset password sent at
-        </th>
-
-        <th>
-          Reset password token
-        </th>
-
-        <th>
-          Username
-        </th>
-
-        <th>
-          Own photos count
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
-        </th>
-      </tr>
-
-      <% @list_of_users.each do |a_user| %>
-      <tr>
-        <td>
-          <%= a_user.id %>
-        </td>
-
-        <td>
-          <%= a_user.comments_count %>
-        </td>
-
-        <td>
-          <%= a_user.email %>
-        </td>
-
-        <td>
-          <%= a_user.encrypted_password %>
-        </td>
-
-        <td>
-          <%= a_user.likes_count %>
-        </td>
-
-        <td>
-          <%= a_user.private %>
-        </td>
-
-        <td>
-          <%= a_user.remember_created_at %>
-        </td>
-
-        <td>
-          <%= a_user.reset_password_sent_at %>
-        </td>
-
-        <td>
-          <%= a_user.reset_password_token %>
-        </td>
-
-        <td>
-          <%= a_user.username %>
-        </td>
-
-        <td>
-          <%= a_user.own_photos_count %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(a_user.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_user.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/users/<%= a_user.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
-</div>
-
-<hr>
+      <td>
+        <a href="/users/<%= a_user.username %>">
+          Show details
+        </a>
+      </td>
+    </tr>
+  <% end %>
+</table>
