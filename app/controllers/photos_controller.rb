@@ -13,8 +13,13 @@ class PhotosController < ApplicationController
     matching_photos = Photo.where({ :id => the_id })
 
     @the_photo = matching_photos.at(0)
-
-    render({ :template => "photos/show" })
+    if @the_photo == nil
+      redirect_to("/404")
+    else
+      render({ :template => "photos/show" })
+      # render(template: "photos_html/show")
+    end
+    
   end
 
   def create
@@ -51,12 +56,24 @@ class PhotosController < ApplicationController
     end
   end
 
-  def destroy
+  def delete
     the_id = params.fetch("path_id")
     the_photo = Photo.where({ :id => the_id }).at(0)
 
     the_photo.destroy
 
     redirect_to("/photos", { :notice => "Photo deleted successfully."} )
+  end
+
+  def comment
+    input_photo_id = params.fetch("input_photo_id")
+    input_author_id = params.fetch("input_author_id")
+    input_comment = params.fetch("input_comment")
+    new_comment = Comment.new
+    new_comment.body = input_comment
+    new_comment.author_id = input_author_id
+    new_comment.photo_id = input_photo_id
+    new_comment.save
+    redirect_to("/photos/" + input_photo_id)
   end
 end

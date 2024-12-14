@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  get("/", controller: "users", action: "index")
+  devise_for :users
+  root "users#index"
+
+  # get("/", controller: "users", action: "index")
 
   # Routes for the Follow request resource:
 

@@ -4,8 +4,8 @@
 #
 #  id                     :bigint           not null, primary key
 #  comments_count         :integer
-#  email                  :string
-#  encrypted_password     :string
+#  email                  :string           default(""), not null
+#  encrypted_password     :string           default(""), not null
 #  likes_count            :integer
 #  own_photos_count       :integer
 #  private                :boolean
@@ -16,8 +16,17 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
+# Indexes
+#
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#
 
 class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
   validates(:username, {
     :presence => true,
     :uniqueness => { :case_sensitive => false },
