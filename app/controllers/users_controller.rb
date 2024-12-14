@@ -19,10 +19,10 @@ class UsersController < ApplicationController
 
   def create
     the_user = User.new
+    the_user.username = params.fetch("query_username")
     the_user.comments_count = params.fetch("query_comments_count")
     the_user.likes_count = params.fetch("query_likes_count")
     the_user.private = params.fetch("query_private", false)
-    the_user.username = params.fetch("query_username")
     the_user.own_photos_count = params.fetch("query_own_photos_count")
 
     if the_user.valid?
@@ -37,10 +37,10 @@ class UsersController < ApplicationController
     the_id = params.fetch("path_id")
     the_user = User.where({ :id => the_id }).at(0)
 
+    the_user.username = params.fetch("query_username")
     the_user.comments_count = params.fetch("query_comments_count")
     the_user.likes_count = params.fetch("query_likes_count")
     the_user.private = params.fetch("query_private", false)
-    the_user.username = params.fetch("query_username")
     the_user.own_photos_count = params.fetch("query_own_photos_count")
 
     if the_user.valid?

@@ -16,6 +16,14 @@
 
     <form action="/insert_user" method="post">
       <div>
+        <label for="username_box">
+          Username
+        </label>
+
+        <input type="text" id="username_box" name="query_username">
+      </div>
+
+      <div>
         <label for="comments_count_box">
           Comments count
         </label>
@@ -35,14 +43,6 @@
         <input type="checkbox" id="private_box" name="query_private" value="1">
 
         <label for="private_box">Private</label>
-      </div>
-
-      <div>
-        <label for="username_box">
-          Username
-        </label>
-
-        <input type="text" id="username_box" name="query_username">
       </div>
 
       <div>
@@ -70,6 +70,10 @@
         </th>
 
         <th>
+          Username
+        </th>
+
+        <th>
           Comments count
         </th>
 
@@ -79,10 +83,6 @@
 
         <th>
           Private
-        </th>
-
-        <th>
-          Username
         </th>
 
         <th>
@@ -108,6 +108,10 @@
         </td>
 
         <td>
+          <%= a_user.username %>
+        </td>
+
+        <td>
           <%= a_user.comments_count %>
         </td>
 
@@ -117,10 +121,6 @@
 
         <td>
           <%= a_user.private %>
-        </td>
-
-        <td>
-          <%= a_user.username %>
         </td>
 
         <td>
