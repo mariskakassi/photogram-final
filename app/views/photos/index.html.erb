@@ -1,150 +1,82 @@
-<div>
-  <div>
-    <h1>
-      List of all photos
-    </h1>
-  </div>
-</div>
+<h1>List of photos</h1>
+
+<form action="/insert_photo_record" method="post">
+  <label for="browser_input">Image</label>
+  <input id="browser_input" type="text" name="input_image" placeholder="Enter a URL for the image">
+
+  <label for="browser_caption">Caption</label>
+  <textarea id="browser_caption" name="input_caption" placeholder="Enter a caption for the photo"></textarea>
+
+  <input id="browser_user_id" type="text" name="input_owner_id" hidden="hidden">
+
+  <button>Add photo</button>
+</form>
 
 <hr>
 
-<div>
-  <div>
-    <h2>
-      Add a new photo
-    </h2>
+<table border="1">
+  <tr>
+    <th>
+      Image
+    </th>
 
-    <form action="/insert_photo" method="post">
-      <div>
-        <label for="caption_box">
-          Caption
-        </label>
+    <th>
+      Caption
+    </th>
 
-        <textarea id="caption_box" name="query_caption" rows="3"></textarea>
-      </div>
+    <th>
+      Owner
+    </th>
 
-      <div>
-        <label for="comments_count_box">
-          Comments count
-        </label>
+    <th>
+      Posted
+    </th>
 
-        <input type="text" id="comments_count_box" name="query_comments_count">
-      </div>
+    <th>
+      Likes
+    </th>
 
-      <div>
-        <label for="image_box">
-          Image
-        </label>
+    <td>
+    </td>
+  </tr>
+  <% years = 0 %>
+  <% months = 0 %>
+  <% @list_of_photos.each do |a_photo| %>
 
-        <input type="text" id="image_box" name="query_image">
-      </div>
+    <tr>
+      <td>
+        <img src="<%= a_photo.image %>" height="300px">
+      </td>
 
-      <div>
-        <label for="likes_count_box">
-          Likes count
-        </label>
+      <td>
+        <%= a_photo.caption %>
+      </td>
 
-        <input type="text" id="likes_count_box" name="query_likes_count">
-      </div>
+      <td>
+        <%= a_photo.poster.username %>
+      </td>
 
-      <div>
-        <label for="owner_id_box">
-          Owner
-        </label>
+      <td>
+        <% years = DateTime.now().year - a_photo.created_at.year%>
+        <% months = a_photo.created_at.month %>
+        <% if months < 3 %>
+          about <%= years %> years ago
+        <% elsif months < 9 %>
+          over <%= years %> years ago
+        <% else %>
+          almost <%= years + 1 %> years ago
+        <% end %>
+      </td>
 
-        <input type="text" id="owner_id_box" name="query_owner_id">
-      </div>
+      <td>
+        <%= a_photo.likes_count %>
+      </td>
 
-      <button>
-        Create photo
-      </button>
-    </form>
-  </div>
-</div>
-
-<hr>
-<div>
-  <div>
-    <table border="1">
-      <tr>
-        <th>
-          ID
-        </th>
-
-        <th>
-          Caption
-        </th>
-
-        <th>
-          Comments count
-        </th>
-
-        <th>
-          Image
-        </th>
-
-        <th>
-          Likes count
-        </th>
-
-        <th>
-          Owner
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
-        </th>
-      </tr>
-
-      <% @list_of_photos.each do |a_photo| %>
-      <tr>
-        <td>
-          <%= a_photo.id %>
-        </td>
-
-        <td>
-          <%= a_photo.caption %>
-        </td>
-
-        <td>
-          <%= a_photo.comments_count %>
-        </td>
-
-        <td>
-          <%= a_photo.image %>
-        </td>
-
-        <td>
-          <%= a_photo.likes_count %>
-        </td>
-
-        <td>
-          <%= a_photo.owner_id %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(a_photo.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_photo.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/photos/<%= a_photo.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
-</div>
-
-<hr>
+      <td>
+        <a href="/photos/<%= a_photo.id %>">
+          Show details
+        </a>
+      </td>
+    </tr>
+  <% end %>
+</table>
