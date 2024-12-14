@@ -1,45 +1,10 @@
 <div>
   <div>
     <h1>
-      User #<%= @the_user.id %> details
+      <%= @the_user.username %>
     </h1>
 
-    <div>
-      <div>
-        <a href="/users">
-          Go back
-        </a>
-      </div>
-
-      <div>
-        <a href="/delete_user/<%= @the_user.id %>">
-          Delete user
-        </a>
-      </div>
-    </div>
-
     <dl>
-      <dt>
-        Username
-      </dt>
-      <dd>
-        <%= @the_user.username %>
-      </dd>
-
-      <dt>
-        Comments count
-      </dt>
-      <dd>
-        <%= @the_user.comments_count %>
-      </dd>
-
-      <dt>
-        Likes count
-      </dt>
-      <dd>
-        <%= @the_user.likes_count %>
-      </dd>
-
       <dt>
         Private
       </dt>
@@ -48,84 +13,102 @@
       </dd>
 
       <dt>
-        Own photos count
+        Followers
       </dt>
       <dd>
-        <%= @the_user.own_photos_count %>
+        <%= @follower_num %>
+        <div>
+        <a href="/delete_follow_request/<%= @the_user.id %"> Unfollow </a>
+        </div>
       </dd>
 
       <dt>
-        Created at
+        Following
       </dt>
       <dd>
-        <%= time_ago_in_words(@the_user.created_at) %> ago
+        <%= @following_num %>
       </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_user.updated_at) %> ago
-      </dd>
+      
     </dl>
   </div>
 </div>
 
-<hr>
-
-
 <div>
-  <div>
-    <h2>
-      Edit user
-    </h2>
+  <ul>
+    <li>
+      <a href="users/<%= @the_user.id %>"> Profile </a>
+    </il>
+    <li>
+      <a href="users/<%= @the_user.id %>/liked_photos"> Liked photos </a>
+    </il>
+    <li>
+      <a href="users/<%= @the_user.id %>/feed"> Feed </a>
+    </il>
+    <li>
+      <a href="users/<%= @the_user.id %>/discover"> Discover </a>
+    </il>
+  </ul>
 
-    <form action="/modify_user/<%= @the_user.id %>"  method="post" >
-      <div>
-        <label for="username_box">
-          Username
-        </label>
-
-        <input type="text" id="username_box" name="query_username" value="<%= @the_user.username %>">
-      </div>
-
-      <div>
-        <label for="comments_count_box">
-          Comments count
-        </label>
-
-        <input type="text" id="comments_count_box" name="query_comments_count" value="<%= @the_user.comments_count %>">
-      </div>
-
-      <div>
-        <label for="likes_count_box">
-          Likes count
-        </label>
-
-        <input type="text" id="likes_count_box" name="query_likes_count" value="<%= @the_user.likes_count %>">
-      </div>
-
-      <div>
-        <input type="checkbox" id="private_box" name="query_private" value="1" <%= "checked" if @the_user.private %>>
-
-        <label for="private_box">
-            Private
-        </label>
-      </div>
-
-      <div>
-        <label for="own_photos_count_box">
-          Own photos count
-        </label>
-
-        <input type="text" id="own_photos_count_box" name="query_own_photos_count" value="<%= @the_user.own_photos_count %>">
-      </div>
-
-      <button>
-        Update user
-      </button>
-    </form>
-  </div>
 </div>
 
-<hr>
+<div>
+  <h2> Own photos (<%= @photo_num %>)</h2>
+  <table border="1">
+  <tr>
+    <th>
+      Image
+    </th>
+
+    <th>
+      Owner
+    </th>
+
+    <th>
+      Caption
+    </th>
+
+    <th>
+      Posted
+    </th>
+
+    <th>
+      Likes
+    </th>
+
+    <td>
+    </td>
+  </tr>
+
+  <% @list_of_photos.each do |a_photo| %>
+
+    <tr>
+      <td>
+        <img src="<%= a_photo.image %>" height="300px">
+      </td>
+
+      <td>
+        <%= a_photo.poster.username %>
+      </td>
+
+      <td>
+        <%= a_photo.caption %>
+      </td>
+
+      <td>
+        <%= time_ago_in_words(a_photo.updated_at) %> ago
+      </td>
+
+      <td>
+        <%= a_photo.likes_count %>
+      </td>
+
+      <td>
+        <a href="/photos/<%= a_photo.id %>">
+          Show details
+        </a>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+
+</div>

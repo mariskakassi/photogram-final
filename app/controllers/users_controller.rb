@@ -14,7 +14,20 @@ class UsersController < ApplicationController
 
     @the_user = matching_users.at(0)
 
+    @list_of_photos = Photo.where({:poster => the_id})
+    @photo_num = Photo.where({:poster => the_id}).count()
+    @follower_num = FollowRequest.where({:recipient => the_id, :status => "accepted"}).count()
+    @following_num = FollowRequest.where({:sender => the_id, :status => "accepted"}).count()
+
     render({ :template => "users/show" })
+  end
+
+  def signup
+    render({ :template => "devise/registrations/new" })
+  end
+
+  def signin
+    render({ :template => "devise/sessions/new" })
   end
 
   def create

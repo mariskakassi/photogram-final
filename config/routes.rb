@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root "users#index"
+
   # Routes for the Comment resource:
 
   # CREATE
@@ -82,8 +84,17 @@ Rails.application.routes.draw do
           
   # READ
   get("/users", { :controller => "users", :action => "index" })
-  
+
+  get("/users/sign_up", { :controller => "users", :action => "signup" })
+
+  get("/users/sign_in", { :controller => "users", :action => "signin" })
+
+  get("/users/sign_out", { :controller => "users", :action => "signout" })
+
+  get("/users/edit", { :controller => "users", :action => "update" })
+
   get("/users/:path_id", { :controller => "users", :action => "show" })
+
   
   # UPDATE
   
@@ -99,5 +110,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  root "photos#index"
+  # root "users#index"
 end

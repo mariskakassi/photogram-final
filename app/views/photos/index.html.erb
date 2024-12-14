@@ -39,8 +39,7 @@
     <td>
     </td>
   </tr>
-  <% years = 0 %>
-  <% months = 0 %>
+  
   <% @list_of_photos.each do |a_photo| %>
 
     <tr>
@@ -57,15 +56,7 @@
       </td>
 
       <td>
-        <% years = DateTime.now().year - a_photo.created_at.year%>
-        <% months = a_photo.created_at.month %>
-        <% if months < 3 %>
-          about <%= years %> years ago
-        <% elsif months < 9 %>
-          over <%= years %> years ago
-        <% else %>
-          almost <%= years + 1 %> years ago
-        <% end %>
+        <%= time_ago_in_words(a_photo.updated_at) %> ago
       </td>
 
       <td>
