@@ -19,7 +19,7 @@
         <%= @follower_num %>
         <div>
         
-        <!--<a href="/delete_follow_request/<%#= @the_user.id %>"> Unfollow </a>-->
+        <!--<a href="/delete_follow_request/<%#= @the_user.username %>"> Unfollow </a>-->
         </div>
       </dd>
 
@@ -37,16 +37,16 @@
 <div>
   <ul>
     <li>
-      <a href="users/<%= @the_user.username %>"> Profile </a>
+      <a href="/users/<%= @the_user.username %>"> Profile </a>
     </il>
     <li>
-      <a href="users/<%= @the_user.username %>/liked_photos"> Liked photos </a>
+      <a href="/users/<%= @the_user.username %>/liked_photos"> Liked photos </a>
     </il>
     <li>
-      <a href="users/<%= @the_user.username %>/feed"> Feed </a>
+      <a href="/users/<%= @the_user.username %>/feed"> Feed </a>
     </il>
     <li>
-      <a href="users/<%= @the_user.username %>/discover"> Discover </a>
+      <a href="/users/<%= @the_user.username %>/discover"> Discover </a>
     </il>
   </ul>
 

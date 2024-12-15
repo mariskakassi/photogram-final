@@ -88,11 +88,11 @@ Rails.application.routes.draw do
 
   #get("/users/sign_up", { :controller => "users", :action => "signup" })
 
-  #get("/users/sign_in", { :controller => "users", :action => "signin" })
+  get("/users/:path_id/discover", { :controller => "users", :action => "discover" })
 
-  #get("/users/sign_out", { :controller => "users", :action => "signout" })
+  get("/users/:path_id/feed", { :controller => "users", :action => "feed" })
 
-  #get("/users/edit", { :controller => "users", :action => "update" })
+  get("/users/:path_id/liked_photos", { :controller => "users", :action => "liked_photos" })
 
   get("/users/:path_id", { :controller => "users", :action => "show" })
 
