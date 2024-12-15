@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   root "users#index"
 
   # Routes for the Comment resource:
@@ -93,7 +94,7 @@ Rails.application.routes.draw do
 
   #get("/users/edit", { :controller => "users", :action => "update" })
 
-  # get("/users/:path_id", { :controller => "users", :action => "show" })
+  get("/users/:path_id", { :controller => "users", :action => "show" })
 
   
   # UPDATE
@@ -105,7 +106,7 @@ Rails.application.routes.draw do
 
   #------------------------------
 
-  devise_for :users
+  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

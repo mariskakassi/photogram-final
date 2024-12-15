@@ -9,11 +9,21 @@ class UsersController < ApplicationController
   end
 
   def show
-    the_id = params.fetch("path_id")
+    
+    the_username = params.fetch("path_id")
 
-    matching_users = User.where({ :id => the_id })
+    matching_users = User.where({ :username => the_username })
+    
+    # the_id = params.fetch("path_id")
+
+    # if the_id == "sign_in"
+    #   redirect_to
+    # end
+
+    # matching_users = User.where({ :id => the_id })
 
     @the_user = matching_users.at(0)
+    the_id = @the_user.id
 
     @list_of_photos = Photo.where({:poster => the_id})
     @photo_num = Photo.where({:poster => the_id}).count()
@@ -23,7 +33,7 @@ class UsersController < ApplicationController
     render({ :template => "users/show" })
   end
 
-  def signup
+  def liked_photos
     render({ :template => "devise/registrations/new" })
   end
 
