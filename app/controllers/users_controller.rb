@@ -13,14 +13,6 @@ class UsersController < ApplicationController
     the_username = params.fetch("path_id")
 
     matching_users = User.where({ :username => the_username })
-    
-    # the_id = params.fetch("path_id")
-
-    # if the_id == "sign_in"
-    #   redirect_to
-    # end
-
-    # matching_users = User.where({ :id => the_id })
 
     @the_user = matching_users.at(0)
     the_id = @the_user.id
