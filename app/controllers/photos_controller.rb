@@ -1,4 +1,5 @@
 class PhotosController < ApplicationController
+  skip_before_action(:authenticate_user!, { :only => [:index] })
   def index
     matching_photos = Photo.all
 
@@ -13,6 +14,8 @@ class PhotosController < ApplicationController
     matching_photos = Photo.where({ :id => the_id })
 
     @the_photo = matching_photos.at(0)
+    @fan_names = User.where({ :id => Like.where({ :photo_id => the_id }).pluck(:fan_id) }).pluck(:username)
+    @list_of_comments = Comment.where({ :photo_id => the_id })
 
     render({ :template => "photos/show" })
   end
