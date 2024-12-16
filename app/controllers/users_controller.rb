@@ -50,7 +50,7 @@ class UsersController < ApplicationController
     @the_user = matching_users.at(0)
     the_id = @the_user.id
 
-    # FollowRequest.where({:sender_id => the_id, :status => "accepted"}).pluck(:recipient_id)
+    FollowRequest.where({:sender_id => the_id, :status => "accepted"})
     @list_of_photos = Photo.where({:owner_id => FollowRequest.where({:sender_id => the_id, :status => "accepted"}).pluck(:recipient_id)})
 
     # @list_of_photos = Photo.where({:poster => the_id})

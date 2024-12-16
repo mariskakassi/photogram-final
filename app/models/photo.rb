@@ -13,6 +13,7 @@
 #
 
 class Photo < ApplicationRecord
+  mount_uploader :image, AvatarUploader
   validates(:poster, { :presence => true })
 
   # Association accessor methods to define:

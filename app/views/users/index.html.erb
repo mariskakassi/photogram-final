@@ -52,7 +52,7 @@
           <% if the_follow_requst != nil %>
             <% if the_follow_requst.status == "accepted"%>
               <!-- Unfollow -->
-              <a href="delete_follow_request/<%= the_follow_requst.id %>">Unfollow</a>
+              <a href="/delete_follow_request/<%= the_follow_requst.id %>">Unfollow</a>
             <% elsif the_follow_requst.status == "rejected" %>
               <!-- leave blank -->
             <% else %>
