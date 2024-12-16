@@ -51,7 +51,7 @@ class UsersController < ApplicationController
     @the_user = matching_users.at(0)
     the_id = @the_user.id
 
-    FollowRequest.where({:sender_id => the_id, :status => "accepted"})
+    # FollowRequest.where({:sender_id => the_id, :status => "accepted"})
     @list_of_photos = Photo.where({:owner_id => FollowRequest.where({:sender_id => the_id, :status => "accepted"}).pluck(:recipient_id)})
 
     # @list_of_photos = Photo.where({:poster => the_id})
@@ -73,7 +73,9 @@ class UsersController < ApplicationController
     @the_user = matching_users.at(0)
     the_id = @the_user.id
 
-    @list_of_photos = Photo.where({:poster => the_id})
+    following_ids = FollowRequest.where({ :sender_id => the_id, :status => "accepted"}).pluck(:recipient_id)
+    @list_of_photos = Photo.where({:id => Like.where({:fan_id => following_ids}).pluck(:photo_id)})
+
     @photo_num = Photo.where({:poster => the_id}).count()
     @follower_num = FollowRequest.where({:recipient => the_id, :status => "accepted"}).count()
     @following_num = FollowRequest.where({:sender => the_id, :status => "accepted"}).count()
